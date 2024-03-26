@@ -1,3 +1,3 @@
 export default function JobListSearch() {
-  return <>JobListSearch</>;
+  return <section className='grow'></section>;
 }
