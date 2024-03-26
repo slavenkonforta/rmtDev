@@ -1,15 +1,11 @@
-import { Search } from 'lucide-react';
-import { Input } from './ui/input';
+type HeaderProps = {
+  children: React.ReactNode;
+};
 
-export default function Header() {
-  return (
-    <header>
-      <div>Logo</div>
-      <div>bookmarks</div>
-      <div className='relative flex items-center'>
-        <Search className='absolute left-2 top-1/2 h-4 w-4 -translate-y-1/2 transform' />
-        <Input placeholder='Your search...' className=' pl-8' />
-      </div>
-    </header>
-  );
+export default function Header({ children }: HeaderProps) {
+  return <header className='flex flex-col items-center justify-center py-10'>{children}</header>;
+}
+
+export function HeaderTop({ children }: { children: React.ReactNode }) {
+  return <div className=' flex items-center justify-center gap-4 p-4'>{children}</div>;
 }

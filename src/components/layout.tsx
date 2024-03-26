@@ -10,9 +10,7 @@ export default function Layout({ children }: LayoutProps) {
       <div className='absolute bottom-8 right-8'>
         <ModeToggle />
       </div>
-      <div className='container h-full'>
-        <main>{children}</main>
-      </div>
+      <main className='container h-full'>{children}</main>
     </div>
   );
 }
