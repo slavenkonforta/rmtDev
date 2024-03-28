@@ -1,6 +1,5 @@
 import Header, { HeaderTop } from './header';
 import Layout from './layout';
-import { ThemeProvider } from './theme-provider';
 import Content from './ui/content';
 import Footer from './ui/footer';
 import SearchForm from './search-form';
@@ -12,37 +11,40 @@ import SortingControls from './sorting-controls';
 import JobListSearch from './job-list-search';
 import PaginationControls from './pagination-controls';
 import JobItemContent from './job-item-content';
+import { useState } from 'react';
+import { useDebounce } from '@/hooks/use-debounce';
 
 function App() {
+  const [searchText, setSearchText] = useState('');
+  const debouncedSearchText = useDebounce(searchText, 1000);
+
   return (
-    <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
-      <Layout>
-        <Header>
-          <HeaderTop>
-            <Logo />
-            <BookmarksButton />
-          </HeaderTop>
-          <SearchForm />
-        </Header>
+    <Layout>
+      <Header>
+        <HeaderTop>
+          <Logo />
+          <BookmarksButton />
+        </HeaderTop>
+        <SearchForm searchText={searchText} setSearchText={setSearchText} />
+      </Header>
 
-        <Content>
-          <Sidebar>
-            <SidebarTop>
-              <ResultCount />
-              <SortingControls />
-            </SidebarTop>
+      <Content>
+        <Sidebar>
+          <SidebarTop>
+            <ResultCount />
+            <SortingControls />
+          </SidebarTop>
 
-            <JobListSearch />
+          <JobListSearch searchText={debouncedSearchText} />
 
-            <PaginationControls />
-          </Sidebar>
+          <PaginationControls />
+        </Sidebar>
 
-          <JobItemContent />
-        </Content>
+        <JobItemContent />
+      </Content>
 
-        <Footer />
-      </Layout>
-    </ThemeProvider>
+      <Footer />
+    </Layout>
   );
 }
 

@@ -1,4 +1,5 @@
 import { ModeToggle } from './mode-toggle';
+import { Toaster } from './ui/toaster';
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -7,10 +8,11 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div className='h-screen w-full'>
-      <div className='absolute bottom-8 right-8'>
+      <div className='absolute right-8 top-8'>
         <ModeToggle />
       </div>
-      <main className='container h-full'>{children}</main>
+      <main className='container flex h-full flex-col'>{children}</main>
+      <Toaster />
     </div>
   );
 }

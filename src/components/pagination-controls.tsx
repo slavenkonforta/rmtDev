@@ -9,7 +9,7 @@ import {
 
 export default function PaginationControls() {
   return (
-    <section className='border-t'>
+    <section className='border-t px-1 py-2'>
       <Pagination>
         <PaginationContent>
           <PaginationItem>
