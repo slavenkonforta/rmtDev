@@ -11,13 +11,8 @@ import SortingControls from './sorting-controls';
 import JobListSearch from './job-list-search';
 import PaginationControls from './pagination-controls';
 import JobItemContent from './job-item-content';
-import { useState } from 'react';
-import { useDebounce } from '@/hooks/use-debounce';
 
 function App() {
-  const [searchText, setSearchText] = useState('');
-  const debouncedSearchText = useDebounce(searchText, 1000);
-
   return (
     <Layout>
       <Header>
@@ -25,7 +20,7 @@ function App() {
           <Logo />
           <BookmarksButton />
         </HeaderTop>
-        <SearchForm searchText={searchText} setSearchText={setSearchText} />
+        <SearchForm />
       </Header>
 
       <Content>
@@ -35,7 +30,7 @@ function App() {
             <SortingControls />
           </SidebarTop>
 
-          <JobListSearch searchText={debouncedSearchText} />
+          <JobListSearch />
 
           <PaginationControls />
         </Sidebar>

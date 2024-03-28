@@ -1,13 +1,12 @@
+import { useJobItemsContext } from '@/hooks/use-job-items-context';
 import JobList from './job-list';
 
-type JobListSearchProps = {
-  searchText: string;
-};
+export default function JobListSearch() {
+  const { jobItemsSortedAndSliced, isLoading } = useJobItemsContext();
 
-export default function JobListSearch({ searchText }: JobListSearchProps) {
   return (
-    <section className='grow'>
-      <JobList searchText={searchText} />
+    <section className='h-[560px]'>
+      <JobList jobItems={jobItemsSortedAndSliced} isLoading={isLoading} />
     </section>
   );
 }

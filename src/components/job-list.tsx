@@ -1,48 +1,21 @@
-import { BASE_API_URL } from '@/lib/constants';
-import { JobItemsApiResponse } from '@/lib/types';
-import { useQuery } from '@tanstack/react-query';
+import { JobItem } from '@/lib/types';
 import JobListItem from './job-list-item';
+import Spinner from './ui/spinner';
 
 type JobListProps = {
-  searchText: string;
+  jobItems: JobItem[];
+  isLoading: boolean;
 };
 
-export default function JobList({ searchText }: JobListProps) {
-  const getJobItems = async () => {
-    const response = await fetch(`${BASE_API_URL}?search=${searchText}`);
-    // if (!response.ok) {
-    //   throw new Error('Network response was not ok');
-    // }
-    const data: JobItemsApiResponse = await response.json();
-    return data.jobItems;
-  };
+export default function JobList({ jobItems, isLoading }: JobListProps) {
+  return (
+    <ul className='h-full'>
+      {isLoading && <Spinner />}
 
-  const {
-    isLoading,
-    isError,
-    data: jobItems,
-    error,
-  } = useQuery({
-    queryKey: ['job-items', searchText],
-    queryFn: getJobItems,
-    staleTime: 1000 * 60 * 60,
-    refetchOnWindowFocus: false,
-    retry: false,
-    enabled: !!searchText,
-    meta: {
-      errorMessage: 'Failed to fetch job items.',
-    },
-  });
-
-  if (isLoading) {
-    return <span>Loading...</span>;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
-
-  console.log('listItems', jobItems);
-
-  return <ul>{jobItems?.map((jobItem) => <JobListItem key={jobItem.id} jobItem={jobItem} isActive={false} />)}</ul>;
+      {!isLoading &&
+        jobItems.map((jobItem) => (
+          <JobListItem key={jobItem.id} jobItem={jobItem} isActive={false} />
+        ))}
+    </ul>
+  );
 }

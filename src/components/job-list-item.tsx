@@ -9,7 +9,7 @@ type JobListItemProps = {
 export default function JobListItem({ jobItem, isActive }: JobListItemProps) {
   return (
     <li
-      className={`${isActive ? 'bg-gray-200/30 dark:bg-secondary/30' : ''} group border-b p-4 last:border-b-0
+      className={`${isActive ? 'bg-gray-200/30 dark:bg-secondary/30' : ''} group h-[80px] border-b p-4 last:border-b-0
        hover:bg-gray-200 dark:hover:bg-secondary`}
     >
       <a href={`#${jobItem.id}`} className='flex items-center gap-2'>
