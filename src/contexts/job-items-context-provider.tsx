@@ -11,6 +11,7 @@ type JobItemsContext = {
   jobItems?: JobItem[];
   isLoading: boolean;
   jobItemsSortedAndSliced: JobItem[];
+  totalNumberOfResults: number;
 };
 
 export const JobItemsContext = createContext<JobItemsContext | null>(null);
@@ -19,10 +20,14 @@ export default function JobItemsContextProvider({ children }: JobItemsContextPro
   const { debouncedSearchText } = useSearchTextContext();
   const { jobItems, isLoading } = useSearchQuery(debouncedSearchText);
 
+  const totalNumberOfResults = jobItems?.length || 0;
+
   const jobItemsSortedAndSliced = jobItems?.slice(0, 7) || [];
 
   return (
-    <JobItemsContext.Provider value={{ jobItems, jobItemsSortedAndSliced, isLoading }}>
+    <JobItemsContext.Provider
+      value={{ jobItems, jobItemsSortedAndSliced, totalNumberOfResults, isLoading }}
+    >
       {children}
     </JobItemsContext.Provider>
   );
