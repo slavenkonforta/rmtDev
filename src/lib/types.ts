@@ -13,3 +13,5 @@ export type JobItem = {
   daysAgo: number;
   badgeBgColor?: string;
 };
+
+export type SortBy = 'relevant' | 'recent';
