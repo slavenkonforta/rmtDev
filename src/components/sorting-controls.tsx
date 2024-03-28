@@ -3,18 +3,35 @@ import { Button } from './ui/button';
 import { useJobItemsContext } from '@/hooks/use-job-items-context';
 
 export default function SortingControls() {
-  const { handleSortByChange } = useJobItemsContext();
+  const { sortBy, handleSortByChange } = useJobItemsContext();
 
   return (
     <section className='flex items-center gap-2'>
       <ArrowDownWideNarrow size={'14px'} />
 
-      <Button onClick={() => handleSortByChange('relevant')} size='sm' variant='outline'>
+      <SortingButton
+        onClick={() => handleSortByChange('relevant')}
+        isActive={sortBy === 'relevant'}
+      >
         Relevant
-      </Button>
-      <Button onClick={() => handleSortByChange('recent')} size='sm' variant='outline'>
+      </SortingButton>
+      <SortingButton onClick={() => handleSortByChange('recent')} isActive={sortBy === 'recent'}>
         Recent
-      </Button>
+      </SortingButton>
     </section>
+  );
+}
+
+type SortingButtonProps = {
+  children: React.ReactNode;
+  onClick: () => void;
+  isActive: boolean;
+};
+
+function SortingButton({ children, onClick, isActive }: SortingButtonProps) {
+  return (
+    <Button onClick={onClick} size='sm' variant={isActive ? 'secondary' : 'outline'}>
+      {children}
+    </Button>
   );
 }
