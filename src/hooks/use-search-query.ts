@@ -27,5 +27,5 @@ export const useSearchQuery = (searchText: string) => {
     },
   });
 
-  return { jobItems: data?.jobItems, isLoading };
+  return { jobItems: data?.jobItems, isLoading } as const;
 };

@@ -1,7 +1,7 @@
 import { JobItem } from '@/lib/types';
 import JobListItem from './job-list-item';
 import Spinner from './ui/spinner';
-import { useActiveId } from '@/hooks/use-active-id';
+import { useActiveIdContext } from '@/hooks/use-active-id-context';
 
 type JobListProps = {
   jobItems: JobItem[];
@@ -9,7 +9,7 @@ type JobListProps = {
 };
 
 export default function JobList({ jobItems, isLoading }: JobListProps) {
-  const activeId = useActiveId();
+  const { activeId } = useActiveIdContext();
   return (
     <ul className='h-full'>
       {isLoading && <Spinner />}

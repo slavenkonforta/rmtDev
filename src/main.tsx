@@ -4,10 +4,11 @@ import ReactDOM from 'react-dom/client';
 
 import App from './components/App.tsx';
 import './index.css';
-import { ThemeProvider } from './components/theme-provider.tsx';
+import { ThemeProvider } from './contexts/theme-provider.tsx';
 import { toast } from './components/ui/use-toast.ts';
 import SearchTextContextProvider from './contexts/search-text-context-provider.tsx';
 import JobItemsContextProvider from './contexts/job-items-context-provider.tsx';
+import ActiveIdContextProvider from './contexts/active-id-context-provider.tsx';
 
 const queryClient = new QueryClient({
   queryCache: new QueryCache({
@@ -32,11 +33,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <ThemeProvider defaultTheme='system' storageKey='vite-ui-theme'>
       <QueryClientProvider client={queryClient}>
-        <SearchTextContextProvider>
-          <JobItemsContextProvider>
-            <App />
-          </JobItemsContextProvider>
-        </SearchTextContextProvider>
+        <ActiveIdContextProvider>
+          <SearchTextContextProvider>
+            <JobItemsContextProvider>
+              <App />
+            </JobItemsContextProvider>
+          </SearchTextContextProvider>
+        </ActiveIdContextProvider>
       </QueryClientProvider>
     </ThemeProvider>
   </React.StrictMode>
