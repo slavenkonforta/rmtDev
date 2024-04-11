@@ -1,6 +1,6 @@
 import Header, { HeaderTop } from './header';
 import Layout from './layout';
-import Content from './ui/content';
+import Content from './content';
 import Footer from './ui/footer';
 import SearchForm from './search-form';
 import Logo from './logo';
