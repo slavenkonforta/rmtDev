@@ -9,7 +9,7 @@ export default function JobItemContent() {
   const { jobItem, isLoading } = useJobItem(activeId);
 
   return (
-    <section className='flex w-2/3 items-center justify-center border-l'>
+    <section className='flex w-2/3 items-start justify-center border-l'>
       {isLoading && <Spinner />}
       {!isLoading && !jobItem && <EmptyJobContent />}
       {!isLoading && jobItem && (
